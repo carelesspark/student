@@ -1,3 +1,5 @@
+package com.javachobo.program1;
+
 import java.util.*;
 
 public class StudentManager {
@@ -5,36 +7,50 @@ public class StudentManager {
 	private ArrayList<Student> dept = new ArrayList<Student>();
 	
 	private void read() {
-		System.out.println("í•™ìƒ ì´ë¦„,í•™ê³¼,í•™ë²ˆ,í•™ì í‰ê·  ì…ë ¥í•˜ì„¸ìš”.");
+		System.out.println("ÇĞ»ı ÀÌ¸§,ÇĞ°ú,ÇĞ¹ø,ÇĞÁ¡Æò±Õ ÀÔ·ÂÇÏ¼¼¿ä.");
 		for (int i=0; i<4; i++) {
 			System.out.print(">> ");
 			String text = scanner.nextLine();
 			StringTokenizer st = new StringTokenizer(text, ",");
 			
+			String name = st.nextToken();
+			String department = st.nextToken() ;
+			String id = st.nextToken();
+			double grade = Double.parseDouble(st.nextToken());
 			
-			// ArrayListì— ì €ì¥
-		}			
+			Student s = new Student(name, department, id, grade);	//¹Ş¾Æ¿Â °ªÀ¸·Î Student »ı¼º
+			dept.add(s);	// ArrayList¿¡ ÀúÀå
+		}
 	}
 	
-	private void printAll() { // ì¼ë¶€ëŸ¬ Iteratorë¡œ ì‘ì„±í•´ ë³´ì•˜ìŒ
+	private void printAll() { // ÀÏºÎ·¯ Iterator·Î ÀÛ¼ºÇØ º¸¾ÒÀ½
 		Iterator<Student> it = dept.iterator();
 		while (it.hasNext()) {
-			
-			//í•™ìƒ ì •ë³´ ì¶œë ¥
+			Student s = it.next();
+			System.out.println("---------------------------------");
+			System.out.println("ÀÌ¸§:"+s.getName());
+			System.out.println("ÇĞ°ú:"+s.getDepartment());
+			System.out.println("ÇĞ¹ø:"+s.getId());
+			System.out.println("ÇĞÁ¡Æò±Õ:"+s.getGrade());
+			System.out.println("---------------------------------");
+			//ÇĞ»ı Á¤º¸ Ãâ·Â
 		}		
 	}
 
 	private void processQuery() {
 		while(true) {
-			System.out.print("í•™ìƒ ì´ë¦„ >> ");
-			String name = scanner.nextLine(); // í•™ìƒ ì´ë¦„ ì…ë ¥
-			if(name.equals("ê·¸ë§Œ"))
-				return; // ì¢…ë£Œ
+			System.out.print("ÇĞ»ı ÀÌ¸§ >> ");
+			String name = scanner.nextLine(); // ÇĞ»ı ÀÌ¸§ ÀÔ·Â
+			if(name.equals("±×¸¸"))
+				return; // Á¾·á
 			
-			for(int i=0; i<dept.size(); i++) { // deptì— ìˆëŠ” ëª¨ë“  í•™ìƒ ê²€ìƒ‰
-				
-				
-				
+			for(int i=0; i<dept.size(); i++) { // dept¿¡ ÀÖ´Â ¸ğµç ÇĞ»ı °Ë»ö
+				Student s = dept.get(i);
+				if(name.equals(s.getName())) {
+					System.out.println(s.getName()+", "+ s.getDepartment() + ", " + 
+							s.getId() + ", " + s.getGrade());
+					break;
+				}				
 			} // end of while
 		}
 	}
